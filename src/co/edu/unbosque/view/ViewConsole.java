@@ -1,24 +1,27 @@
 package co.edu.unbosque.view;
 
 import javax.swing.*;
+import java.util.Scanner;
 
 public class ViewConsole {
-    private String tamano;
+    private String scanner;
     public ViewConsole() {
 
     }
 
-    public void ingresarinformacion(String mensaje){
-        tamano =  JOptionPane.showInputDialog(mensaje);
+    public void ingresarinformacion(){
+        Scanner sc = new Scanner (System.in); //Creación de un objeto Scanner
+       scanner = sc.nextLine();
     }
     public void mostrarInformacion( String mensaje) {
-        System.out.print(mensaje);
-    }
-    public String getTamano() {
-        return tamano;
+        System.out.println(mensaje);
     }
 
-    public void setTamano(String tamano) {
-        this.tamano = tamano;
+    public String getScanner() {
+        return scanner;
+    }
+
+    public void setScanner(String scanner) {
+        this.scanner = scanner;
     }
 }
