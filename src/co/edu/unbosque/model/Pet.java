@@ -41,4 +41,60 @@ public class Pet {
                 ", neighborhood='" + neighborhood + '\'' +
                 '}';
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public long getMicroship() {
+        return microship;
+    }
+
+    public void setMicroship(long microship) {
+        this.microship = microship;
+    }
+
+    public String getSpcies() {
+        return spcies;
+    }
+
+    public void setSpcies(String spcies) {
+        this.spcies = spcies;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public boolean isPotentDangeorous() {
+        return potentDangeorous;
+    }
+
+    public void setPotentDangeorous(boolean potentDangeorous) {
+        this.potentDangeorous = potentDangeorous;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class ManagerDao {
 
     private ArrayList<Pet> pets;
+    private ArrayList<Pet> aux;
     private File file = new File("data/pets-citizens.csv");
     private Pet archivoP;
     private int contadorAgre;
@@ -55,6 +56,11 @@ public class ManagerDao {
                              potentDangerous = true;
                         }
                         String neighborhood=parts[5];
+                        char[] csize = size.toCharArray();
+                        char psize='P';
+                        if(csize[0]==psize){
+                            size="PEQUENO";
+                        }
                         Pet nuevo = new Pet(id, microchip, species, sex, size, potentDangerous, neighborhood);
                         pets.add(nuevo);
                         contadorAgre++;
@@ -77,37 +83,65 @@ public class ManagerDao {
         System.out.println("Se omitieron un total de "+contadorN2+" por campo vacio en el atributo neighborhood  ");
     }
     public void assignID(){
+        String strdangerous ;
+        String id = null;
+        for (int i=0;i<pets.size();i++) {
 
+            String strchip = pets.get(i).getMicroship()+"";
+            String strspecies = pets.get(i).getSpcies()+"";
+            String strsex = pets.get(i).getSex()+"";
+            String strsize = pets.get(i).getSize()+"";
+            boolean strapeligroso = pets.get(i).isPotentDangeorous();
+            char[] chip = strchip.toCharArray();
+            char[] species = strspecies.toCharArray();
+            char[] sex = strsex.toCharArray();
+            String size;
+
+            if(strsize.equalsIgnoreCase("MINIATURA")){
+                size = "Mi";
+            }else if(strsize.equalsIgnoreCase("PEQUENO")){
+                size = "P";
+            }else if(strsize.equalsIgnoreCase("MEDIANO")){
+                size = "M";
+            }else if(strsize.equalsIgnoreCase("GRANDE")){
+                size = "G";
+            }else{
+                size = "G";
+            }
+            if(strapeligroso){
+               strdangerous="T";
+            }else{
+               strdangerous="F";
+            }
+            id = ((chip[chip.length - 2]) + "" + (chip[chip.length - 1]) + "-"
+                    + species[0] + "" + sex[0] + "" + size+""+strdangerous);
+            Pet nuevo = new Pet(id,pets.get(i).getMicroship(),pets.get(i).getSpcies(),pets.get(i).getSex(),
+                    pets.get(i).getSize(),pets.get(i).isPotentDangeorous(),pets.get(i).getNeighborhood());
+            pets.set(i, nuevo);
+        }
     }
 
     public ArrayList<Pet> getPets() {
         return pets;
     }
-
     public void setPets(ArrayList<Pet> pets) {
         this.pets = pets;
     }
-
     public int getContadorAgre() {
         return contadorAgre;
     }
-
     public void setContadorAgre(int contadorAgre) {
         this.contadorAgre = contadorAgre;
     }
-
     public int getContadorN1() {
         return contadorN1;
     }
-
     public void setContadorN1(int contadorN1) {
         this.contadorN1 = contadorN1;
     }
-
     public int getContadorN2() {
         return contadorN2;
     }
-
     public void setContadorN2(int contadorN2) {
         this.contadorN2 = contadorN2;
     }

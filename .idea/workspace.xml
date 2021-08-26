@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acfaedb7-a5ce-4be7-89da-cd685dc31ec6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/ManagerDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/unbosque/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/model/Pet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/unbosque/model/Pet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/Dao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/Dto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/view/ViewConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/unbosque/view/ViewConsole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/ManagerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/ManagerDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +68,11 @@
       <option name="presentableId" value="Default" />
       <updated>1629666244103</updated>
       <workItem from="1629666249975" duration="817000" />
-      <workItem from="1629746450683" duration="10415000" />
+      <workItem from="1629746450683" duration="11011000" />
+      <workItem from="1629825065323" duration="874000" />
+      <workItem from="1629942100523" duration="2347000" />
+      <workItem from="1629982013733" duration="6818000" />
+      <workItem from="1629989445260" duration="585000" />
     </task>
     <servers />
   </component>
