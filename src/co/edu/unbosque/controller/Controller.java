@@ -18,9 +18,13 @@ public class Controller {
     }
     public void mensajeinteraccion(){
         v.mostrarInformacion("Bienvenido al programa Ciudadanos de 4 Patas");
-        v.mostrarInformacion("Para cargar la informacion de las mascotas presione la tecla : 1");
-        v.mostrarInformacion("Para  asignar el id correspondiente a cada mascota presion la telca : 2");
-        v.mostrarInformacion("");
+        v.mostrarInformacion("Para cargar la informacion de las mascotas presione la tecla: 1");
+        v.mostrarInformacion("Para  asignar el id correspondiente a cada mascota presion la telca: 2");
+        v.mostrarInformacion("Para buscar los datos de una mascota por microchip presione la tecla: 3");
+        v.mostrarInformacion("Para contar la cantida de mascotas por especie presione la tecla: 4");
+        v.mostrarInformacion("Para contar la cantidad de animaler por localidad presione la tecla: 5");
+        v.mostrarInformacion("Para listar los animaler por peligrosidad presione la tecla: 6");
+
         v.ingresarinformacion();
         try {
             int caso =Integer.parseInt(v.getScanner());
@@ -37,7 +41,7 @@ public class Controller {
     public void interaccion(int caso){
         switch (caso){
             case 1: {
-                dao.cargarCSV();
+                dao.uploadData();
                 System.out.println("caso1");
                 for(int i=0;i<=(dao.getContadorAgre()-1);i++){
                     v.mostrarInformacion(dao.getPets().get(i).toString1());
@@ -55,8 +59,37 @@ public class Controller {
                 for(int i=0;i<=(dao.getContadorAgre()-1);i++){
                     v.mostrarInformacion(dao.getPets().get(i).toString());
                 }
+                mensajeinteraccion();
             }
             case 3: {
+                v.mostrarInformacion("Por favor ingrese unicamente el numero del microochip que desea buscar");
+                v.ingresarinformacion();
+                String consola=v.getScanner();
+                long chip= Long.parseLong(consola);
+                v.mostrarInformacion("La mascota que ha buscado "+dao.findByMicrochip(chip));
+                mensajeinteraccion();
+
+            }
+            case 4: {
+                v.mostrarInformacion("Por favor ingrese 1 para buscar felinos. ingrese 2 para buscar caninos");
+                v.mostrarInformacion("y 3 para ver la cantidad de felinos y caninos");
+                v.ingresarinformacion();
+                int consola=Integer.parseInt(v.getScanner());
+                v.mostrarInformacion(dao.countBySpecies(consola));
+                mensajeinteraccion();
+            }
+            case 5: {
+                v.mostrarInformacion("Por favor ingrese unicamente la localidad en la que desea contar las mascotas");
+                v.ingresarinformacion();
+                String consola=v.getScanner();
+                dao.countByNeighborhood(consola);
+            }
+            case 6: {
+                v.mostrarInformacion("Por favor ingrese 1 para ver las mascotas peligrosas, 2 para ver las no peligrosas");
+                v.ingresarinformacion();
+                String consola=v.getScanner();
+                boolean dangerouss= Boolean.parseBoolean(consola);
+                dao.findByMultipleFields(dangerouss);
             }
         }
 

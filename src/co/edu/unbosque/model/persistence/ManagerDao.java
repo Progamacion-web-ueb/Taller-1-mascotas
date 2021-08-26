@@ -32,7 +32,7 @@ public class ManagerDao {
             }
         }
     }
-    public void cargarCSV() {
+    public void uploadData() {
         String line;
         contadorAgre=0;
         contadorN1=0;
@@ -45,7 +45,7 @@ public class ManagerDao {
                 String[] parts = line.split(";");
                 if(!parts[0].equalsIgnoreCase("microchip")){
                     try {
-                        String id="0";
+                        String id="NO ASIGNADO";
                         long microchip= Long.parseLong(parts[0]);
                         String species=parts[1];
                         String sex=parts[2];
@@ -115,10 +115,96 @@ public class ManagerDao {
             }
             id = ((chip[chip.length - 2]) + "" + (chip[chip.length - 1]) + "-"
                     + species[0] + "" + sex[0] + "" + size+""+strdangerous);
+             ArrayList<String> ids= new ArrayList<String>();
+             ids.add(id);
+            busqueda(ids,"00-CHMF");
             Pet nuevo = new Pet(id,pets.get(i).getMicroship(),pets.get(i).getSpcies(),pets.get(i).getSex(),
-                    pets.get(i).getSize(),pets.get(i).isPotentDangeorous(),pets.get(i).getNeighborhood());
+                                 pets.get(i).getSize(),pets.get(i).isPotentDangeorous(),pets.get(i).getNeighborhood());
             pets.set(i, nuevo);
         }
+    }
+
+    public int busqueda(ArrayList<String> arreglo, String busqueda){
+        int izquierda = 0, derecha = arreglo.size() - 1;
+        while (izquierda <= derecha) {
+            int indiceDelElementoDelMedio = (int) Math.floor((izquierda + derecha) / 2);
+            String elementoDelMedio = arreglo.get(indiceDelElementoDelMedio);
+            int resultadoDeLaComparacion = busqueda.compareTo(elementoDelMedio);
+            if (resultadoDeLaComparacion == 0) {
+                return indiceDelElementoDelMedio;
+            }
+            if (resultadoDeLaComparacion < 0) {
+                derecha = indiceDelElementoDelMedio - 1;
+            } else {
+                izquierda = indiceDelElementoDelMedio + 1;
+            }
+        }
+        return -1;
+    }
+
+
+    public String findByMicrochip(long microchip){
+        String mensaje="no se ha encontrado";
+        for(int i=0;i<pets.size();i++){
+            if (microchip==pets.get(i).getMicroship()){
+                mensaje=pets.get(i).toString();
+                break;
+            }
+        }
+        return mensaje ;
+    }
+    public String countBySpecies(int species){
+        String mensaje="";
+        int contadorC=0;
+        int contadorF=0;
+        for(int i=0;i<pets.size();i++){
+
+            if(pets.get(i).getSpcies().equalsIgnoreCase("CANINO")){
+                contadorC++;
+            }else {
+                contadorF++;
+            }
+
+            if(species==3){
+                mensaje="La cantidad de felinos es "+contadorF+" y la cantidad de caninos es"+contadorC;
+            }else if(species==1){
+                mensaje="La cantidad de felinos es "+contadorF;
+            }else if (species==2){
+                mensaje="La cantidad de caninos es "+contadorC;
+            }
+
+        }
+        return mensaje;
+    }
+    public String countByNeighborhood(String neighborhood){
+        String mensaje;
+        int contador;
+        for(int i=0;i<pets.size();i++){
+            if(pets.get(i).getNeighborhood().equalsIgnoreCase(neighborhood)){
+
+            }
+        }
+        return "mensaje" ;
+    }
+    public String findByMultipleFields(boolean dangerous){
+        String mensaje="";
+        int contadorT=0;
+        int contadorF=0;
+        for(int i=0;i<pets.size();i++){
+
+            if(pets.get(i).isPotentDangeorous()){
+                contadorT++;
+            }else {
+                contadorF++;
+            }
+
+            if(dangerous){
+
+            }else if(dangerous){
+
+            }
+        }
+        return mensaje;
     }
 
     public ArrayList<Pet> getPets() {
