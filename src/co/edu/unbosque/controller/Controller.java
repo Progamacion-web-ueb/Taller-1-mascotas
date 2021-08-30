@@ -44,12 +44,11 @@ public class Controller {
                 dao.uploadData();
                 System.out.println("caso1");
                 for(int i=0;i<=(dao.getContadorAgre()-1);i++){
-                    v.mostrarInformacion(dao.getPets().get(i).toString1());
+                    v.mostrarInformacion(dao.getPets().get(i).toString());
                 }
                 v.mostrarInformacion("Se cargaron un total de "+dao.getContadorAgre()+" Exitosamente");
                 v.mostrarInformacion("Se omitieron un total de "+dao.getContadorN1()+" por error en el tipo de dato en el campo chip");
                 v.mostrarInformacion("Se omitieron un total de "+dao.getContadorN2()+" por campo vacio en el atributo neighborhood  ");
-
                 mensajeinteraccion();
 
 
@@ -82,7 +81,8 @@ public class Controller {
                 v.mostrarInformacion("Por favor ingrese unicamente la localidad en la que desea contar las mascotas");
                 v.ingresarinformacion();
                 String consola=v.getScanner();
-                dao.countByNeighborhood(consola);
+                v.mostrarInformacion(dao.countByNeighborhood(consola));
+                mensajeinteraccion();
             }
             case 6: {
                 v.mostrarInformacion("Por favor ingrese 1 para ver las mascotas peligrosas, 2 para ver las no peligrosas");
@@ -90,6 +90,7 @@ public class Controller {
                 String consola=v.getScanner();
                 boolean dangerouss= Boolean.parseBoolean(consola);
                 dao.findByMultipleFields(dangerouss);
+                mensajeinteraccion();
             }
         }
 

@@ -31,16 +31,7 @@ public class Pet {
                 ", neighborhood='" + neighborhood + '\'' +
                 '}';
     }
-    public String toString1() {
-        return "Pet{" +
-                ", microship=" + microship +
-                ", spcies='" + spcies + '\'' +
-                ", sex='" + sex + '\'' +
-                ", size='" + size + '\'' +
-                ", potentDangeorous=" + potentDangeorous +
-                ", neighborhood='" + neighborhood + '\'' +
-                '}';
-    }
+
 
     public String getId() {
         return id;

@@ -10,7 +10,7 @@ public class ManagerDao {
 
     private ArrayList<Pet> pets;
     private ArrayList<Pet> aux;
-    private File file = new File("data/pets-citizens.csv");
+    private File file = new File("data/pets-citizens-pruebas.csv");
     private Pet archivoP;
     private int contadorAgre;
     private int contadorN1;
@@ -177,15 +177,55 @@ public class ManagerDao {
         return mensaje;
     }
     public String countByNeighborhood(String neighborhood){
-        String mensaje;
-        int contador;
-        for(int i=0;i<pets.size();i++){
-            if(pets.get(i).getNeighborhood().equalsIgnoreCase(neighborhood)){
+        String mensaje="";
+        int contador=0;
+
+        if(neighborhood.isEmpty()){
+            ArrayList <String>barrio = new ArrayList();
+            ArrayList <Integer>acontador = new ArrayList();
+            barrio.add(pets.get(0).getNeighborhood());
+            acontador.add(contador);
+            int i=0;
+            for(int j=0;j<23;j++){
+                while (i<pets.size()){
+                   //barrio.get(j).equalsIgnoreCase(pets.get(i).getNeighborhood())
+                    String barrio1=barrio.get(j);
+                    String barrio2=pets.get(i).getNeighborhood();
+                    if(barrio1.equalsIgnoreCase(barrio2)){
+                        contador++;
+                        acontador.set(j,contador);
+                    }else{
+                        barrio.add(pets.get(i).getNeighborhood());
+                        acontador.add(1);
+                        i++;
+                        contador=1;
+                        break;
+                    }
+                    i++;
+                }
 
             }
+
+                for(int u=0;u<22;u++){
+                    mensaje=mensaje+barrio.get(u)+": "+acontador.get(u)+'\'';
+                }
+
+
+
+        }else{
+            for(int i=0;i<pets.size();i++){
+                if(pets.get(i).getNeighborhood().equalsIgnoreCase(neighborhood)){
+                    contador++;
+
+                }
+            }
+            mensaje=neighborhood+": "+contador;
         }
-        return "mensaje" ;
+
+
+        return mensaje ;
     }
+
     public String findByMultipleFields(boolean dangerous){
         String mensaje="";
         int contadorT=0;
