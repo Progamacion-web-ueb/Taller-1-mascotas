@@ -7,7 +7,6 @@
     <list default="true" id="acfaedb7-a5ce-4be7-89da-cd685dc31ec6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/unbosque/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/model/Pet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/unbosque/model/Pet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/ManagerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/ManagerDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +73,7 @@
       <workItem from="1629982013733" duration="6818000" />
       <workItem from="1629989445260" duration="6802000" />
       <workItem from="1630277026122" duration="2031000" />
-      <workItem from="1630358211324" duration="6427000" />
+      <workItem from="1630358211324" duration="14360000" />
     </task>
     <servers />
   </component>
@@ -98,10 +97,15 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/ManagerDao.java</url>
-          <line>182</line>
-          <option name="timeStamp" value="8" />
+          <line>233</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Taller_1_mascotas$AplMain.ic" NAME="AplMain Coverage Results" MODIFIED="1630386356411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>co.edu.unbosque.controller.*</FILTER>
+    </SUITE>
   </component>
 </project>

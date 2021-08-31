@@ -226,25 +226,72 @@ public class ManagerDao {
         return mensaje ;
     }
 
-    public String findByMultipleFields(boolean dangerous){
-        String mensaje="";
-        int contadorT=0;
-        int contadorF=0;
-        for(int i=0;i<pets.size();i++){
+    public String findByMultipleFields(int caso, int n, String position, String spices, String sex, String size, String dangerous, String neighborhood){
+        System.out.println(n+"," +position + "," + spices + "," + sex + "," + size + "," + dangerous + "," + neighborhood);
+        ArrayList<Pet> petsMF= new ArrayList();
+        petsMF =pets;
 
-            if(pets.get(i).isPotentDangeorous()){
-                contadorT++;
-            }else {
-                contadorF++;
+        switch (caso){
+            //solo posicion
+            case 1: {
+                if(n!=0){
+                    System.out.println("ejecucion caso 1");
+                    int tamaño=petsMF.size();
+                    if(position.equalsIgnoreCase("top")){
+                        while (petsMF.size()!=n){
+                            petsMF.remove(n);
+                        }
+                    }else if(position.equalsIgnoreCase("last")){
+                        while (petsMF.size()!=n){
+                            petsMF.remove(0);
+                        }
+                    }
+                    findByMultipleFields(2,n,position,spices,sex,size,dangerous,neighborhood);
+                }
+                break;
             }
-
-            if(dangerous){
-
-            }else if(dangerous){
-
+            //solo species
+            case 2: {
+                if(!spices.isEmpty()){
+                    System.out.println("ejecucion caso 2");
+                    findByMultipleFields(3,n,position,spices,sex,size,dangerous,neighborhood);
+                }
+                break;
+            }
+            //solo sex
+            case 3: {
+                if(!sex.isEmpty()){
+                    System.out.println("ejecucion caso 3");
+                    findByMultipleFields(4,n,position,spices,sex,size,dangerous,neighborhood);
+                }
+                break;
+            }
+            //solo size
+            case 4: {
+                if(!size.isEmpty()){
+                    System.out.println("ejecucion caso 4");
+                    findByMultipleFields(5,n,position,spices,sex,size,dangerous,neighborhood);
+                }
+                break;
+            }
+            //solo dangerous
+            case 5: {
+                if(!dangerous.isEmpty()){
+                    System.out.println("ejecucion caso 5");
+                    findByMultipleFields(6,n,position,spices,sex,size,dangerous,neighborhood);
+                }
+                break;
+            }
+            //solo neighborhood
+            case 6: {
+                if(!neighborhood.isEmpty()){
+                    System.out.println("ejecucion caso 6");
+                    findByMultipleFields(0,n,position,spices,sex,size,dangerous,neighborhood);
+                }
+                break;
             }
         }
-        return mensaje;
+      return  petsMF.toString();
     }
 
     public ArrayList<Pet> getPets() {

@@ -85,12 +85,36 @@ public class Controller {
                 mensajeinteraccion();
             }
             case 6: {
-                v.mostrarInformacion("Por favor ingrese 1 para ver las mascotas peligrosas, 2 para ver las no peligrosas");
+                v.mostrarInformacion("Ingrese el numero de datos a mostrar");
                 v.ingresarinformacion();
-                String consola=v.getScanner();
-                boolean dangerouss= Boolean.parseBoolean(consola);
-                dao.findByMultipleFields(dangerouss);
-                mensajeinteraccion();
+                int n=0;
+                if(!v.getScanner().isEmpty()){
+                    n=Integer.parseInt(v.getScanner());
+                }
+                v.mostrarInformacion("Ingrese la posicion (top,last)");
+                v.ingresarinformacion();
+                String position=v.getScanner();
+                v.mostrarInformacion("Ingrese la especie (canino,felino)");
+                v.ingresarinformacion();
+                String spices=v.getScanner();
+                v.mostrarInformacion("Ingrese el sexo(macho,hembra)");
+                v.ingresarinformacion();
+                String sex=v.getScanner();
+                v.mostrarInformacion("Ingrese el tamaño(pequeno,mediano,grande)");
+                v.ingresarinformacion();
+                String size=v.getScanner();
+                v.mostrarInformacion("Ingrese is es un animal potencialmente peligroso(true,false)");
+                v.ingresarinformacion();
+                String dangerous=v.getScanner();
+                v.mostrarInformacion("Ingrese la localidad");
+                v.ingresarinformacion();
+                String neighborhood=v.getScanner();
+                if(n==0&&position.isEmpty()&&spices.isEmpty()&&sex.isEmpty()&&size.isEmpty()&&dangerous.isEmpty()&&neighborhood.isEmpty()){
+                    v.mostrarInformacion("Por favor ingrese al menos un atributo de busqueda");
+                    mensajeinteraccion();
+                }
+                v.mostrarInformacion(dao.findByMultipleFields(1,n,position,spices,sex,size,dangerous,neighborhood));
+                //mensajeinteraccion();
             }
         }
 
