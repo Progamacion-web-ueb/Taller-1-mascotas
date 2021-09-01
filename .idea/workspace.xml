@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acfaedb7-a5ce-4be7-89da-cd685dc31ec6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/co/edu/unbosque/model/IdentifierExistsException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/unbosque/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/ManagerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/ManagerDao.java" afterDir="false" />
@@ -73,7 +74,9 @@
       <workItem from="1629982013733" duration="6818000" />
       <workItem from="1629989445260" duration="6802000" />
       <workItem from="1630277026122" duration="2031000" />
-      <workItem from="1630358211324" duration="14360000" />
+      <workItem from="1630358211324" duration="15632000" />
+      <workItem from="1630429305058" duration="3140000" />
+      <workItem from="1630447619442" duration="8279000" />
     </task>
     <servers />
   </component>
@@ -95,10 +98,13 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/ManagerDao.java</url>
-          <line>233</line>
-          <option name="timeStamp" value="11" />
+          <line>92</line>
+          <properties class="co.edu.unbosque.model.persistence.ManagerDao" method="assignID">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

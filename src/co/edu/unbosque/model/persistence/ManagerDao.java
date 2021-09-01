@@ -1,5 +1,6 @@
 package co.edu.unbosque.model.persistence;
 
+import co.edu.unbosque.model.IdentifierExistsException;
 import co.edu.unbosque.model.Pet;
 
 import java.io.*;
@@ -10,19 +11,23 @@ public class ManagerDao {
 
     private ArrayList<Pet> pets;
     private ArrayList<Pet> aux;
-    private File file = new File("data/pets-citizens-pruebas.csv");
+    private ArrayList<Pet> petsMF;
+    private File file = new File("data/pets-citizens.csv");
     private Pet archivoP;
+
     private int contadorAgre;
     private int contadorN1;
     private int contadorN2;
     private BufferedReader br;
     private FileReader fr;
+    private boolean bDangerous;
 
 
     public ManagerDao(){
         if (file.exists()) {
             System.out.println("El archivo existe");
             pets= new ArrayList<Pet>();
+            petsMF=new ArrayList();
         } else {
             try {
                 file.createNewFile();
@@ -32,8 +37,9 @@ public class ManagerDao {
             }
         }
     }
-    public void uploadData() {
+    public boolean uploadData() {
         String line;
+        boolean mensaje=false;
         contadorAgre=0;
         contadorN1=0;
         contadorN2=0;
@@ -64,6 +70,7 @@ public class ManagerDao {
                         Pet nuevo = new Pet(id, microchip, species, sex, size, potentDangerous, neighborhood);
                         pets.add(nuevo);
                         contadorAgre++;
+                        mensaje=true;
                     } catch (NumberFormatException e) {
                         //System.out.println("EL formato del chip no es long, el registro fue omitido");
                         contadorN1++;
@@ -78,12 +85,14 @@ public class ManagerDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Se cargaron un total de "+contadorAgre+" Exitosamente");
-        System.out.println("Se omitieron un total de "+contadorN1+" por error en el tipo de dato en el campo chip");
-        System.out.println("Se omitieron un total de "+contadorN2+" por campo vacio en el atributo neighborhood  ");
+        //System.out.println("Se cargaron un total de "+contadorAgre+" Exitosamente");
+        //System.out.println("Se omitieron un total de "+contadorN1+" por error en el tipo de dato en el campo chip");
+        //System.out.println("Se omitieron un total de "+contadorN2+" por campo vacio en el atributo neighborhood  ");
+        return mensaje;
     }
-    public void assignID(){
+    public boolean assignID(){
         String strdangerous ;
+        boolean mensaje=false;
         String id = null;
         for (int i=0;i<pets.size();i++) {
 
@@ -113,33 +122,26 @@ public class ManagerDao {
             }else{
                strdangerous="F";
             }
+            try{
             id = ((chip[chip.length - 2]) + "" + (chip[chip.length - 1]) + "-"
                     + species[0] + "" + sex[0] + "" + size+""+strdangerous);
-             ArrayList<String> ids= new ArrayList<String>();
-             ids.add(id);
-            busqueda(ids,"00-CHMF");
+                for(int j=0;j<pets.size();j++){
+                    if(id.equalsIgnoreCase(pets.get(j).getId())){
+                        throw new IdentifierExistsException("prueba");
+                    }else if(pets.get(j).getId().equalsIgnoreCase("NO ASIGNADO")){
+                        break;
+                    }
+                }
+            }catch (IdentifierExistsException ex){
+                id = ((chip[chip.length - 3]) + "" +(chip[chip.length - 2]) + "" + (chip[chip.length - 1]) + "-"
+                        + species[0] + "" + sex[0] + "" + size+""+strdangerous);
+            }
             Pet nuevo = new Pet(id,pets.get(i).getMicroship(),pets.get(i).getSpcies(),pets.get(i).getSex(),
                                  pets.get(i).getSize(),pets.get(i).isPotentDangeorous(),pets.get(i).getNeighborhood());
             pets.set(i, nuevo);
+            mensaje=true;
         }
-    }
-
-    public int busqueda(ArrayList<String> arreglo, String busqueda){
-        int izquierda = 0, derecha = arreglo.size() - 1;
-        while (izquierda <= derecha) {
-            int indiceDelElementoDelMedio = (int) Math.floor((izquierda + derecha) / 2);
-            String elementoDelMedio = arreglo.get(indiceDelElementoDelMedio);
-            int resultadoDeLaComparacion = busqueda.compareTo(elementoDelMedio);
-            if (resultadoDeLaComparacion == 0) {
-                return indiceDelElementoDelMedio;
-            }
-            if (resultadoDeLaComparacion < 0) {
-                derecha = indiceDelElementoDelMedio - 1;
-            } else {
-                izquierda = indiceDelElementoDelMedio + 1;
-            }
-        }
-        return -1;
+        return mensaje;
     }
 
 
@@ -158,13 +160,11 @@ public class ManagerDao {
         int contadorC=0;
         int contadorF=0;
         for(int i=0;i<pets.size();i++){
-
             if(pets.get(i).getSpcies().equalsIgnoreCase("CANINO")){
                 contadorC++;
             }else {
                 contadorF++;
             }
-
             if(species==3){
                 mensaje="La cantidad de felinos es "+contadorF+" y la cantidad de caninos es"+contadorC;
             }else if(species==1){
@@ -172,14 +172,12 @@ public class ManagerDao {
             }else if (species==2){
                 mensaje="La cantidad de caninos es "+contadorC;
             }
-
         }
         return mensaje;
     }
     public String countByNeighborhood(String neighborhood){
         String mensaje="";
         int contador=0;
-
         if(neighborhood.isEmpty()){
             ArrayList <String>barrio = new ArrayList();
             ArrayList <Integer>acontador = new ArrayList();
@@ -205,13 +203,9 @@ public class ManagerDao {
                 }
 
             }
-
                 for(int u=0;u<22;u++){
                     mensaje=mensaje+barrio.get(u)+": "+acontador.get(u)+'\'';
                 }
-
-
-
         }else{
             for(int i=0;i<pets.size();i++){
                 if(pets.get(i).getNeighborhood().equalsIgnoreCase(neighborhood)){
@@ -225,17 +219,16 @@ public class ManagerDao {
 
         return mensaje ;
     }
+    public void llenarArray(){
+        petsMF = new ArrayList<>(pets);
+    }
 
     public String findByMultipleFields(int caso, int n, String position, String spices, String sex, String size, String dangerous, String neighborhood){
-        System.out.println(n+"," +position + "," + spices + "," + sex + "," + size + "," + dangerous + "," + neighborhood);
-        ArrayList<Pet> petsMF= new ArrayList();
-        petsMF =pets;
 
         switch (caso){
             //solo posicion
             case 1: {
                 if(n!=0){
-                    System.out.println("ejecucion caso 1");
                     int tamaño=petsMF.size();
                     if(position.equalsIgnoreCase("top")){
                         while (petsMF.size()!=n){
@@ -246,47 +239,67 @@ public class ManagerDao {
                             petsMF.remove(0);
                         }
                     }
-                    findByMultipleFields(2,n,position,spices,sex,size,dangerous,neighborhood);
                 }
-                break;
+                findByMultipleFields(2,n,position,spices,sex,size,dangerous,neighborhood);
             }
             //solo species
             case 2: {
                 if(!spices.isEmpty()){
-                    System.out.println("ejecucion caso 2");
-                    findByMultipleFields(3,n,position,spices,sex,size,dangerous,neighborhood);
+                    for(int i=0;i<petsMF.size();i++){
+                        if(!spices.equalsIgnoreCase(petsMF.get(i).getSpcies())){
+                            petsMF.remove(i);
+                        }
+                    }
                 }
-                break;
+                findByMultipleFields(3,n,position,spices,sex,size,dangerous,neighborhood);
             }
             //solo sex
             case 3: {
                 if(!sex.isEmpty()){
-                    System.out.println("ejecucion caso 3");
-                    findByMultipleFields(4,n,position,spices,sex,size,dangerous,neighborhood);
+                    for(int i=0;i<petsMF.size();i++){
+                        if(!sex.equalsIgnoreCase(petsMF.get(i).getSex())){
+                            petsMF.remove(i);
+                        }
+                    }
                 }
-                break;
+                findByMultipleFields(4,n,position,spices,sex,size,dangerous,neighborhood);
             }
             //solo size
             case 4: {
                 if(!size.isEmpty()){
-                    System.out.println("ejecucion caso 4");
-                    findByMultipleFields(5,n,position,spices,sex,size,dangerous,neighborhood);
+                    for(int i=0;i<petsMF.size();i++){
+                        if(!size.equalsIgnoreCase(petsMF.get(i).getSize())){
+                            petsMF.remove(i);
+                        }
+                    }
                 }
-                break;
+                findByMultipleFields(5,n,position,spices,sex,size,dangerous,neighborhood);
             }
             //solo dangerous
             case 5: {
                 if(!dangerous.isEmpty()){
-                    System.out.println("ejecucion caso 5");
-                    findByMultipleFields(6,n,position,spices,sex,size,dangerous,neighborhood);
+
+                    for(int i=0;i<petsMF.size();i++){
+                        if(dangerous.equalsIgnoreCase("true")){
+                            bDangerous=true;
+                        }else  if(dangerous.equalsIgnoreCase("false")){
+                            bDangerous=false;
+                        }
+                        if(bDangerous!=petsMF.get(i).isPotentDangeorous()){
+                            petsMF.remove(i);
+                        }
+                    }
                 }
-                break;
+                findByMultipleFields(6,n,position,spices,sex,size,dangerous,neighborhood);
             }
             //solo neighborhood
             case 6: {
                 if(!neighborhood.isEmpty()){
-                    System.out.println("ejecucion caso 6");
-                    findByMultipleFields(0,n,position,spices,sex,size,dangerous,neighborhood);
+                    for(int i=0;i<petsMF.size();i++){
+                        if(!neighborhood.equalsIgnoreCase(petsMF.get(i).getNeighborhood())){
+                            petsMF.remove(i);
+                        }
+                    }
                 }
                 break;
             }
@@ -294,6 +307,12 @@ public class ManagerDao {
       return  petsMF.toString();
     }
 
+    public ArrayList<Pet> getPetsMF() {
+        return petsMF;
+    }
+    public void setPetsMF(ArrayList<Pet> petsMF) {
+        this.petsMF = petsMF;
+    }
     public ArrayList<Pet> getPets() {
         return pets;
     }
