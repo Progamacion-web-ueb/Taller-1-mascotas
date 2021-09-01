@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acfaedb7-a5ce-4be7-89da-cd685dc31ec6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/co/edu/unbosque/model/IdentifierExistsException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/unbosque/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/ManagerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/edu/unbosque/model/persistence/ManagerDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +74,7 @@
       <workItem from="1630277026122" duration="2031000" />
       <workItem from="1630358211324" duration="15632000" />
       <workItem from="1630429305058" duration="3140000" />
-      <workItem from="1630447619442" duration="8279000" />
+      <workItem from="1630447619442" duration="9130000" />
     </task>
     <servers />
   </component>
